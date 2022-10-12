@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+</head>
+<body>
+<script>
+
+//Write to session storage
+
+sessionStorage.setItem('name', "ronin");
+
+
+
+//read from session storage
+
+let name = sessionStorage.getItem('name');
+
+document.write(name);
+
+
+
+//Write to local storage
+
+localStorage.setItem('name', "ronin");
+
+
+
+//read from local storage
+
+name = localStorage.getItem('name');
+
+document.write(name);
+
+
+
+//write to cookie
+
+document.cookie = "hello world";
+
+
+
+//read from cookie
+
+document.write(document.cookie);
+
+
+
+//initializing a websql database
+
+let db = openDatabase('testDatabase', '1.0', 'LabExperiment', 2 * 1024 * 1024);
+
+
+
+//creating a table in websql
+
+db.transaction(function (e) { 
+
+e.executeSql('CREATE TABLE IF NOT EXISTS STUDENT (firstName , lastName)'); 
+
+});
+
+
+
+//writing data into table in websql
+
+db.transaction(function (e) { 
+
+e.executeSql('INSERT INTO STUDENT (firstName, lastName) VALUES ("Ravi", "Prakash")'); 
+
+e.executeSql('INSERT INTO STUDENT (firstName, lastName) VALUES ("Srinu", "Potnuru")'); 
+
+}); 
+
+
+
+//reading data from table in websql
+
+db.transaction(function (e) { 
+
+e.executeSql('SELECT * FROM STUDENT', [], function (e, result) { 
+
+document.write(result.rows); 
+
+}, null); 
+
+});
+
+</script>
+</body>
+</html>
